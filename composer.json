@@ -1,0 +1,13 @@
+{
+    "name": "glennpratt/JetPay",
+    "autoload": {
+        "psr-0": { "JetPay": "lib/" }
+    },
+    "suggest": {
+        "behat/behat": ">=2.2.2"
+    },
+
+    "config": {
+        "bin-dir": "bin/"
+    }
+}
