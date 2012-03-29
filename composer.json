@@ -1,5 +1,5 @@
 {
-    "name": "glennpratt/JetPay",
+    "name": "AllPlayers/JetPay",
     "autoload": {
         "psr-0": { "JetPay": "lib/" }
     },
