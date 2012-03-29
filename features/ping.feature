@@ -3,7 +3,7 @@ Feature: Ping
   As a test client
   I need to be able to ping JetPay
 
-  Scenario: Searching for a page that does exist
+  Scenario: Pinging JetPay test gateway
     Given I am using "https://test1.jetpay.com/jetpay"
     And I have a TransactionID of "010327153017T10052"
     When I create a ping request
