@@ -2,17 +2,17 @@
 
 PHP 5.3+ library for interacting with JetPay XML API.
 
-# Development
+## Development
 
  - Clone this repo and `cd` into it.
  - `wget -nc http://getcomposer.org/composer.phar`
  - `php -d detect_unicode=0 composer.phar install`
 
-# Feature tests
+## Feature tests
 
  - `bin/behat`
 
-# Unit tests
+## Unit tests
 
  - PHPUnit - TODO
 
