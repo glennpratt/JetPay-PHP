@@ -3,6 +3,9 @@
     "autoload": {
         "psr-0": { "JetPay": "lib/" }
     },
+    "require": {
+        "kriswallsmith/buzz": ">=0.5"
+    },
     "suggest": {
         "behat/behat": ">=2.2.2"
     },

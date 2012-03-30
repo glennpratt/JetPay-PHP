@@ -10,12 +10,12 @@ use Behat\Gherkin\Node\PyStringNode,
 use JetPay\Client;
 use JetPay\Objects\JetPay;
 
-//
+
 // Require 3rd-party libraries here:
-//
-//   require_once 'PHPUnit/Autoload.php';
-//   require_once 'PHPUnit/Framework/Assert/Functions.php';
-//
+
+require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
+
 
 /**
  * Features context.
@@ -31,6 +31,8 @@ class FeatureContext extends BehatContext
      * @var Client
      */
     protected $client;
+
+    protected $response;
 
     /**
      * Initializes context.
@@ -65,7 +67,7 @@ class FeatureContext extends BehatContext
      */
     public function iCreateAPingRequest()
     {
-        throw new PendingException();
+        $this->request->setTransactionType('PING');
     }
 
     /**
@@ -73,7 +75,7 @@ class FeatureContext extends BehatContext
      */
     public function iExecuteTheRequest()
     {
-        throw new PendingException();
+        $this->response = $this->client->post($this->request);
     }
 
     /**
@@ -81,7 +83,9 @@ class FeatureContext extends BehatContext
      */
     public function iShouldGet(PyStringNode $string)
     {
-        throw new PendingException();
+      $expected = DOMDocument::loadXML($string);
+      $got = DOMDocument::loadXML($this->response->getContent());
+      assertEquals($expected->saveXML(), $got->saveXML());
     }
 
 }
