@@ -10,18 +10,20 @@ class Client {
       'Accept: text/xml',
   );
 
+  protected $gateway;
+
   /**
    * Set the gateway url.
    *
    * @param string $url
    */
   public function setGateway($url) {
-
+    $this->gateway = $url;
   }
 
   public function post($data) {
     $browser = new Browser();
-    return $browser->post('https://test1.jetpay.com/jetpay', $this->headers, (string) $data);
+    return $browser->post($this->gateway, $this->headers, (string) $data);
   }
 
 }
