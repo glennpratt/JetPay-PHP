@@ -1,7 +1,7 @@
 Feature: Ping
-  In order to see test connectivity
-  As a test client
-  I need to be able to ping JetPay
+  In order to test connectivity
+  As a client
+  I need to be able to ping JetPay.
 
   Scenario: Pinging JetPay test gateway
     Given I am using "https://test1.jetpay.com/jetpay"
