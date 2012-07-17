@@ -1,16 +1,42 @@
 {
-    "name": "AllPlayers/JetPay",
-    "autoload": {
-        "psr-0": { "JetPay": "lib/" }
-    },
-    "require": {
-        "kriswallsmith/buzz": ">=0.5"
-    },
-    "require-dev": {
-        "behat/behat": ">=2.2.2"
-    },
-
-    "config": {
-        "bin-dir": "bin/"
+  "name":"AllPlayers/JetPay",
+  "autoload":{
+    "psr-0":{
+      "JetPay":"lib/"
     }
+  },
+  "require":{
+    "kriswallsmith/buzz":">=0.5"
+  },
+  "require-dev":{
+    "behat/behat":">=2.2.2",
+    "pear-phpunit/PHPUnit":"3.6.11",
+    "pear-phpunit/PHPUnit_Selenium":"1.2.7"
+  },
+  "repositories":[
+    {
+      "type":"vcs",
+      "url":"git@github.com:AllPlayers/AllPlayers-PHP.git"
+    },
+    {
+      "type":"pear",
+      "url":"pear.phpunit.de"
+    },
+    {
+      "type":"pear",
+      "url":"pear.symfony-project.com"
+    }
+  ],
+  "include-path":[
+    "pear-phpunit/File_Iterator",
+    "pear-phpunit/PHP_CodeCoverage",
+    "pear-phpunit/PHPUnit",
+    "pear-phpunit/PHPUnit_MockObject",
+    "pear-phpunit/PHP_Timer",
+    "pear-phpunit/PHP_TokenStream",
+    "pear-phpunit/Text_Template"
+  ],
+  "config":{
+    "bin-dir":"bin/"
+  }
 }
