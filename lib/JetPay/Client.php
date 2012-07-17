@@ -1,8 +1,6 @@
 <?php
 namespace JetPay;
 
-use Buzz\Browser;
-
 class Client {
 
   protected $headers = array(
@@ -22,8 +20,8 @@ class Client {
   }
 
   public function post($data) {
-    $browser = new Browser();
-    return $browser->post($this->gateway, $this->headers, (string) $data);
+    $client = new \Guzzle\Service\Client();
+    return $client->post($this->gateway, $this->headers, (string) $data)->send();
   }
 
 }

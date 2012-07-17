@@ -84,7 +84,7 @@ class FeatureContext extends BehatContext
     public function iShouldGet(PyStringNode $string)
     {
       $expected = DOMDocument::loadXML($string);
-      $got = DOMDocument::loadXML($this->response->getContent());
+      $got = DOMDocument::loadXML($this->response->getBody());
       assertEquals($expected->saveXML(), $got->saveXML());
     }
 
