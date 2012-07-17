@@ -6,7 +6,7 @@
     "require": {
         "kriswallsmith/buzz": ">=0.5"
     },
-    "suggest": {
+    "require-dev": {
         "behat/behat": ">=2.2.2"
     },
 
