@@ -1,12 +1,19 @@
 <?php
 namespace JetPay\Objects;
 
+use DOMDocument;
+
 /**
  * Represents the request JetPay XML data structure.
  */
 class JetPay {
-  protected $transaction_id;
-  protected $transaction_type;
+  protected $TransactionID;
+  protected $TransactionType;
+  protected $TerminalID;
+
+  public function setTerminalId($id) {
+    $this->TerminalID = $id;
+  }
 
   /**
    * Set TransactionID
@@ -14,7 +21,7 @@ class JetPay {
    * @param string $id
    */
   public function setTransactionId($id) {
-    $this->transaction_id = $id;
+    $this->TransactionID = $id;
   }
 
   /**
@@ -23,15 +30,27 @@ class JetPay {
    * @param string $id
    */
   public function setTransactionType($type) {
-    $this->transaction_type = $type;
+    $this->TransactionType = $type;
   }
 
+  /**
+   * Convert object to XML wrapper object.
+   *
+   * @return DOMDocument
+   */
+  public function toXML() {
+    $xml = new DOMDocument('1.0', 'utf-8');
+    $jetpay = $xml->appendChild($xml->createElement('JetPay'));
+    foreach ($this as $key => $property) {
+      $jetpay->appendChild($xml->createElement($key, $property));
+    }
+    return $xml;
+  }
+
+  /**
+   * @return string
+   */
   public function __toString() {
-    return "<JetPay>
-<TransactionType>{$this->transaction_type}</TransactionType>
-<TerminalID>TESTMERCHANT</TerminalID>
-<TransactionID>{$this->transaction_id}</TransactionID>
-</JetPay> ";
+    return $this->toXML()->saveXML();
   }
-
 }

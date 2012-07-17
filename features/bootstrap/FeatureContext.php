@@ -43,6 +43,8 @@ class FeatureContext extends BehatContext
     public function __construct(array $parameters)
     {
         $this->request = new JetPay();
+        // Use the test merchant id by default.
+        $this->request->setTerminalId('TESTMERCHANT');
         $this->client = new Client();
     }
 
