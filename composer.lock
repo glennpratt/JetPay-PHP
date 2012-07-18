@@ -1,16 +1,89 @@
 {
-    "hash": "0cc35f90d89d2c674ac246b2404ba576",
+    "hash": "18a1437653f6b34a43a29967e1a6dd75",
     "packages": [
         {
             "package": "guzzle/guzzle",
             "version": "v2.8.1"
+        },
+        {
+            "package": "symfony/event-dispatcher",
+            "version": "v2.1.0-BETA3"
         }
     ],
-    "packages-dev": null,
+    "packages-dev": [
+        {
+            "package": "behat/behat",
+            "version": "v2.4.2"
+        },
+        {
+            "package": "behat/gherkin",
+            "version": "v2.2.2"
+        },
+        {
+            "package": "pear-pear.phpunit.de/File_Iterator",
+            "version": "1.3.1"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHPUnit",
+            "version": "3.6.11"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHPUnit_MockObject",
+            "version": "1.1.1"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHPUnit_Selenium",
+            "version": "1.2.7"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHP_CodeCoverage",
+            "version": "1.1.3"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHP_Timer",
+            "version": "1.0.2"
+        },
+        {
+            "package": "pear-pear.phpunit.de/PHP_TokenStream",
+            "version": "1.1.3"
+        },
+        {
+            "package": "pear-pear.phpunit.de/Text_Template",
+            "version": "1.1.1"
+        },
+        {
+            "package": "pear-pear.symfony-project.com/YAML",
+            "version": "1.0.6"
+        },
+        {
+            "package": "symfony/config",
+            "version": "v2.1.0-BETA3"
+        },
+        {
+            "package": "symfony/console",
+            "version": "v2.1.0-BETA3"
+        },
+        {
+            "package": "symfony/dependency-injection",
+            "version": "v2.1.0-BETA3"
+        },
+        {
+            "package": "symfony/finder",
+            "version": "v2.1.0-BETA3"
+        },
+        {
+            "package": "symfony/translation",
+            "version": "v2.1.0-BETA3"
+        },
+        {
+            "package": "symfony/yaml",
+            "version": "v2.1.0-BETA3"
+        }
+    ],
     "aliases": [
 
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "stability-flags": [
 
     ]
