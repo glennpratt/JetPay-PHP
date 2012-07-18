@@ -6,7 +6,7 @@ use DOMDocument;
 /**
  * Represents the request JetPay XML data structure.
  */
-class JetPay {
+class JetPay extends JetPayXMLObject {
   protected $TransactionID;
   protected $TransactionType;
   protected $TerminalID;
@@ -33,24 +33,20 @@ class JetPay {
     $this->TransactionType = $type;
   }
 
-  /**
-   * Convert object to XML wrapper object.
-   *
-   * @return DOMDocument
-   */
-  public function toXML() {
-    $xml = new DOMDocument('1.0', 'utf-8');
-    $jetpay = $xml->appendChild($xml->createElement('JetPay'));
-    foreach ($this as $key => $property) {
-      $jetpay->appendChild($xml->createElement($key, $property));
-    }
-    return $xml;
+  public function setCardNum($num) {
+    $this->CardNum = $num;
   }
 
-  /**
-   * @return string
-   */
-  public function __toString() {
-    return $this->toXML()->saveXML();
+  public function setCardExpMonth($month) {
+    $this->CardExpMonth = $month;
+  }
+  public function setCardExpYear($year) {
+    $this->CardExpYear = $year;
+  }
+  public function setTotalAmount($cents) {
+    $this->TotalAmount = $cents;
+  }
+  public function setApproval($id) {
+    $this->Approval = $id;
   }
 }

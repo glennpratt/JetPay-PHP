@@ -9,6 +9,7 @@ use Behat\Gherkin\Node\PyStringNode,
 
 use JetPay\Client;
 use JetPay\Objects\JetPay;
+use JetPay\Objects\JetPayResponse;
 
 
 // Require 3rd-party libraries here:
@@ -57,19 +58,28 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @Given /^I have a TransactionID of "([^"]*)"$/
+     * @Given /^I have a "([^"]*)" of "([^"]*)"$/
      */
-    public function iHaveATransactionidOf($id)
+    public function iHaveAOf($arg1, $arg2)
     {
-        $this->request->setTransactionId($id);
+      $setter = "set{$arg1}";
+      $this->request->$setter($arg2);
     }
 
     /**
-     * @When /^I create a ping request$/
+     * @Given /^I have an "([^"]*)" of "([^"]*)"$/
      */
-    public function iCreateAPingRequest()
+    public function iHaveAnOf($arg1, $arg2)
     {
-        $this->request->setTransactionType('PING');
+      return $this->iHaveAOf($arg1, $arg2);
+    }
+
+    /**
+     * @Given /^I have a "([^"]*)" of ""(\d+)"$/
+     */
+    public function iHaveAOf2($arg1, $arg2)
+    {
+      return $this->iHaveAOf($arg1, $arg2);
     }
 
     /**
@@ -77,7 +87,27 @@ class FeatureContext extends BehatContext
      */
     public function iExecuteTheRequest()
     {
+        //echo $this->request;
+        //exit;
         $this->response = $this->client->post($this->request);
+    }
+
+    /**
+     * @When /^I create a "([^"]*)" request$/
+     */
+    public function iCreateARequest($arg1)
+    {
+      $this->request->setTransactionType($arg1);
+    }
+
+    /**
+     * @Then /^I should get ActionCode "([^"]*)"$/
+     */
+    public function iShouldGetActioncode($arg1)
+    {
+      $doc = DOMDocument::loadXML($this->response->getBody());
+      $response = JetPayResponse::fromXML($doc);
+      assertEquals($arg1, $response->getActionCode());
     }
 
     /**

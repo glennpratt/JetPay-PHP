@@ -1,6 +1,9 @@
 <?php
-class JetPayResponse {
+namespace JetPay\Objects;
 
-  protected $document;
+class JetPayResponse extends JetPayXMLObject {
 
+  public function getActionCode() {
+    return $this->ActionCode;
+  }
 }
