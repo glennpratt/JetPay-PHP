@@ -1,7 +1,7 @@
-Feature: General Examples
-  In order to test connectivity
+Feature: Standard Certification Tests
+  In order to be approved for JetPay usage
   As a client
-  I need to make common test request to JetPay.
+  I need to make several different test transactions.
 
   Scenario Outline: Sale Transaction Tests
     Given I am using "https://test1.jetpay.com/jetpay"
