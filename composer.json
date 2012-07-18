@@ -1,5 +1,5 @@
 {
-  "name":"AllPlayers/JetPay",
+  "name":"allplayers/jetpay",
   "description":"Library for interacting with JetPay's XML Payment API.",
   "license":"MIT",
   "authors":[
