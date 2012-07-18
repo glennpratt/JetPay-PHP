@@ -1,0 +1,9 @@
+# Ignore composer generated files
+composer.phar
+composer.lock
+composer-test.lock
+vendor/
+bin/
+
+# Ignore certification test exports
+/*.csv
