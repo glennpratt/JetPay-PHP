@@ -1,6 +1,6 @@
 # JetPay-PHP
 
-PHP 5.3+ library for interacting with JetPay XML API.
+PHP 5.3+ library for interacting with JetPay XML API. Sponsored by [AllPlayers.com](https://www.allplayers.com).
 
 [![Build Status](https://secure.travis-ci.org/AllPlayers/JetPay-PHP.png)](http://travis-ci.org/AllPlayers/JetPay-PHP)
 
