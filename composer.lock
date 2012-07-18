@@ -1,0 +1,17 @@
+{
+    "hash": "0cc35f90d89d2c674ac246b2404ba576",
+    "packages": [
+        {
+            "package": "guzzle/guzzle",
+            "version": "v2.8.1"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
+    ]
+}
