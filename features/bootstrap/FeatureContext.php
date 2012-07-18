@@ -35,6 +35,11 @@ class FeatureContext extends BehatContext
 
     protected $response;
 
+    protected $major_test_id;
+    protected $current_test_id;
+    protected static $test_shared_storage = array();
+    protected static $test_case_result = array();
+
     /**
      * Initializes context.
      * Every scenario gets it's own context object.
@@ -55,6 +60,16 @@ class FeatureContext extends BehatContext
     public function iAmUsing($url)
     {
         $this->client->setGateway($url);
+    }
+
+    /**
+     * @Given /^I have a valid, unique TransactionID$/
+     */
+    public function iHaveAValidUniqueTransactionid()
+    {
+      $random_padding = implode('', array_rand(array_flip(array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9))), 4));
+      $id = date('YmdHis') . $random_padding;
+      $this->request->setTransactionId($id);
     }
 
     /**
@@ -107,7 +122,7 @@ class FeatureContext extends BehatContext
     {
       $doc = DOMDocument::loadXML($this->response->getBody());
       $response = JetPayResponse::fromXML($doc);
-      assertEquals($arg1, $response->getActionCode());
+      assertRegExp("/$arg1/", $response->getActionCode());
     }
 
     /**
@@ -118,6 +133,61 @@ class FeatureContext extends BehatContext
       $expected = DOMDocument::loadXML($string);
       $got = DOMDocument::loadXML($this->response->getBody());
       assertEquals($expected->saveXML(), $got->saveXML());
+    }
+
+    /**
+     * @Given /^I\'m running test case "([^"]*)"$/
+     */
+    public function iMRunningTestCase($arg1)
+    {
+      $this->current_test_id = $arg1;
+      // Strip lowercase sub-test identifier to use the same storage for major tests.
+      $this->major_test_id = preg_replace("/[^A-Z0-9\s\p{P}]/", "", $arg1);
+
+      if (isset(self::$test_shared_storage[$this->major_test_id])) {
+        $stored_response = self::$test_shared_storage[$this->major_test_id];
+        $approval = $stored_response->getApproval();
+        $this->request->setApproval($approval);
+      }
+    }
+
+    /**
+     * @Given /^store data for this test case$/
+     */
+    public function storeDataForThisTestCase()
+    {
+      if (empty($this->major_test_id) || empty($this->current_test_id)) {
+        throw new ErrorException('Current test case not found, step invalid.');
+      }
+      $doc = DOMDocument::loadXML($this->response->getBody());
+      $response = JetPayResponse::fromXML($doc);
+      self::$test_case_result[$this->current_test_id] = $response;
+
+      // Store the major test case response on the first minor test.
+      if (!isset(self::$test_shared_storage[$this->major_test_id])) {
+        self::$test_shared_storage[$this->major_test_id] = $response;
+      }
+    }
+
+    /**
+     * @AfterFeature
+     */
+    public static function writeCertificationTestCSV() {
+      $filename = 'jetpay-certification-results.csv';
+      $fp = fopen($filename, 'w');
+
+      $header = array('Test Case', 'Transaction ID', 'Action Code', 'Approval');
+      $keys = array_flip($header);
+
+      fputcsv($fp, $header, ',', '"');
+      foreach (self::$test_case_result as $id => $result) {
+        $values = array($id);
+        $values[] = $result->getTransactionID();
+        $values[] = $result->getActionCode();
+        $values[] = $result->getApproval();
+        fputcsv($fp, $values, ',', '"');
+      }
+      echo 'Certification CSV written to: '. getcwd() . "/$filename \n";
     }
 
 }
