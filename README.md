@@ -2,6 +2,15 @@
 
 PHP 5.3+ library for interacting with JetPay XML API.
 
+## Installation
+Use [Composer](http://getcomposer.org/).  In your composer.json:
+
+    {
+      "require": {
+        "AllPlayers/JetPay": "*"
+      }
+    }
+
 ## Development
 
     < Clone this repo and `cd` into it. >
