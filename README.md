@@ -23,4 +23,4 @@ Generate a CSV file of prescribed test cases for JetPay.
     cd JetPay-PHP
     wget -nc http://getcomposer.org/composer.phar
     php -d detect_unicode=0 composer.phar install --dev
-    bin/behat features/standard_sales.feature
+    bin/behat features/certification_credit.feature
