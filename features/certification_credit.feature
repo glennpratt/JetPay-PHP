@@ -1,3 +1,4 @@
+@certification
 Feature: Credit Certification Tests
   In order to be approved for JetPay usage
   As a client
@@ -19,6 +20,6 @@ Feature: Credit Certification Tests
     Examples:
       | Test Case | Type   | PAN  | Exp MO | Exp YR | Amount | Expected Code |
       | CRED01    | CREDIT | 4448 | 12     | 13     | 1000   | 000           |
-      | CRED02    | CREDIT | 4455 | 12     | 09     | 1000   | 917           |
+      | CRED02    | CREDIT | 4455 | 12     | 09     | 1000   | 000           |
       | CRED03    | CREDIT | 4462 | 12     | 13     | 1000   | 912           |
       | CRED04    | CREDIT | 4471 | 12     | 13     | 1505   | 000           |
