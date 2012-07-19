@@ -120,7 +120,8 @@ class FeatureContext extends BehatContext
      */
     public function iShouldGetActioncode($arg1)
     {
-      $doc = DOMDocument::loadXML($this->response->getBody());
+      $doc = new DOMDocument();
+      $doc->loadXML($this->response->getBody());
       $response = JetPayResponse::fromXML($doc);
       assertRegExp("/$arg1/", $response->getActionCode());
     }
@@ -130,8 +131,10 @@ class FeatureContext extends BehatContext
      */
     public function iShouldGet(PyStringNode $string)
     {
-      $expected = DOMDocument::loadXML($string);
-      $got = DOMDocument::loadXML($this->response->getBody());
+      $expected = new DOMDocument();
+      $expected->loadXML($string);
+      $got = new DOMDocument();
+      $got->loadXML($this->response->getBody());
       assertEquals($expected->saveXML(), $got->saveXML());
     }
 
@@ -159,7 +162,8 @@ class FeatureContext extends BehatContext
       if (empty($this->major_test_id) || empty($this->current_test_id)) {
         throw new ErrorException('Current test case not found, step invalid.');
       }
-      $doc = DOMDocument::loadXML($this->response->getBody());
+      $doc = new DOMDocument();
+      $doc->loadXML($this->response->getBody());
       $response = JetPayResponse::fromXML($doc);
       self::$test_case_result[$this->current_test_id] = $response;
 
