@@ -168,8 +168,8 @@ class FeatureContext extends BehatContext
 
       if (isset(self::$test_shared_storage[$this->major_test_id])) {
         $stored_response = self::$test_shared_storage[$this->major_test_id];
-        $approval = $stored_response->getApproval();
-        $this->request->setApproval($approval);
+        $this->request->setApproval($stored_response->getApproval());
+        $this->request->setTransactionID($stored_response->getTransactionID());
       }
     }
 
