@@ -48,9 +48,6 @@ class FeatureContext extends BehatContext
      */
     public function __construct(array $parameters)
     {
-        $this->request = new JetPay();
-        // Use the test merchant id by default.
-        $this->request->setTerminalId('TESTMERCHANT');
         $this->client = new Client();
     }
 
@@ -112,6 +109,9 @@ class FeatureContext extends BehatContext
      */
     public function iCreateARequest($arg1)
     {
+      $this->request = new JetPay();
+      // Use the test merchant id by default.
+      $this->request->setTerminalId('TESTMERCHANT');
       $this->request->setTransactionType($arg1);
     }
 
@@ -136,6 +136,25 @@ class FeatureContext extends BehatContext
       $got = new DOMDocument();
       $got->loadXML($this->response->getBody());
       assertEquals($expected->saveXML(), $got->saveXML());
+    }
+
+    /**
+     * @Given /^I store the response$/
+     */
+    public function iStoreTheResponse()
+    {
+      $doc = new DOMDocument();
+      $doc->loadXML($this->response->getBody());
+      $response = JetPayResponse::fromXML($doc);
+      $this->lastResponse = $response;
+    }
+
+    /**
+     * @Given /^I use the stored response "([^"]*)"$/
+     */
+    public function iUseTheStoredResponse($arg1)
+    {
+      $this->request->{"set$arg1"}($this->lastResponse->{"get$arg1"}());
     }
 
     /**
@@ -165,7 +184,6 @@ class FeatureContext extends BehatContext
       $doc = new DOMDocument();
       $doc->loadXML($this->response->getBody());
       $response = JetPayResponse::fromXML($doc);
-      self::$test_case_result[$this->current_test_id] = $response;
 
       // Store the major test case response on the first minor test.
       if (!isset(self::$test_shared_storage[$this->major_test_id])) {
@@ -174,9 +192,24 @@ class FeatureContext extends BehatContext
     }
 
     /**
-     * @AfterFeature
+     * @AfterScenario @certification
+     */
+    public function storeCertification() {
+      $doc = new DOMDocument();
+      $doc->loadXML($this->response->getBody());
+      $response = JetPayResponse::fromXML($doc);
+      self::$test_case_result[$this->current_test_id] = $response;
+    }
+
+    /**
+     * @AfterSuite
      */
     public static function writeCertificationTestCSV() {
+      // Check if we should write and if we have any results.
+      if (!getenv('JETPAY_WRITE_CERT_CSV') || empty(self::$test_case_result)) {
+        return;
+      }
+
       $filename = 'jetpay-certification-results.csv';
       $fp = fopen($filename, 'w');
 

@@ -8,4 +8,4 @@ before_script:
   - curl http://getcomposer.org/installer | php
   - php composer.phar install --dev
 
-script: bin/behat -fprogress 
+script: bin/behat --tags '~@overkill' 

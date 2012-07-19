@@ -5,15 +5,15 @@ Feature: Standard Certification Tests
   I need to make several different test transactions.
 
   Scenario Outline: Sale 1-3 Transaction Tests
-    Given I am using "https://test1.jetpay.com/jetpay"
+    Given I create a "<Type>" request
+    And I am using "https://test1.jetpay.com/jetpay"
     And I have a valid, unique TransactionID
     And I have a "CardNum" of "411111111111<PAN>"
     And I have a "CardExpMonth" of "<Exp MO>"
     And I have a "CardExpYear" of "<Exp YR>"
     And I have a "TotalAmount" of "<Amount>"
     And I'm running test case "<Test Case>"
-    When I create a "<Type>" request
-    And I execute the request
+    When I execute the request
     Then I should get ActionCode "<Expected Code>"
     And store data for this test case
 
@@ -25,15 +25,15 @@ Feature: Standard Certification Tests
 
   @overkill
   Scenario Outline: Sale 4-104 Transaction Tests
-    Given I am using "https://test1.jetpay.com/jetpay"
+    Given I create a "<Type>" request
+    And I am using "https://test1.jetpay.com/jetpay"
     And I have a valid, unique TransactionID
     And I have a "CardNum" of "411111111111<PAN>"
     And I have a "CardExpMonth" of "<Exp MO>"
     And I have a "CardExpYear" of "<Exp YR>"
     And I have a "TotalAmount" of "<Amount>"
     And I'm running test case "<Test Case>"
-    When I create a "<Type>" request
-    And I execute the request
+    When I execute the request
     Then I should get ActionCode "<Expected Code>"
     And store data for this test case
 
@@ -142,15 +142,15 @@ Feature: Standard Certification Tests
       | STND104   | SALE     | 1137 | 12     | 13     | 200    | \d\d\d        |
 
   Scenario Outline: Sale 105-109 Transaction Tests
-    Given I am using "https://test1.jetpay.com/jetpay"
+    Given I create a "<Type>" request
+    And I am using "https://test1.jetpay.com/jetpay"
     And I have a valid, unique TransactionID
     And I have a "CardNum" of "411111111111<PAN>"
     And I have a "CardExpMonth" of "<Exp MO>"
     And I have a "CardExpYear" of "<Exp YR>"
     And I have a "TotalAmount" of "<Amount>"
     And I'm running test case "<Test Case>"
-    When I create a "<Type>" request
-    And I execute the request
+    When I execute the request
     Then I should get ActionCode "<Expected Code>"
     And store data for this test case
 
