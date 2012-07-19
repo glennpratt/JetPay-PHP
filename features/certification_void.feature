@@ -18,7 +18,7 @@ Feature: Void Certification Tests
     And store data for this test case
 
     Examples:
-      | Test Case | Type     | PAN  | Exp MO | Exp YR | Amount | Expected Code |
-      | VOID01a   | AUTHONLY | 5519 | 12     | 13     | 1000   | 000           |
-      | VOID01b   | VOID     | 5519 | 12     | 13     | 1000   | 000           |
+      | Test Case | Type | PAN  | Exp MO | Exp YR | Amount | Expected Code |
+      | VOID01a   | SALE | 5519 | 12     | 13     | 1000   | 000           |
+      | VOID01b   | VOID | 5519 | 12     | 13     | 1000   | 000           |
 
