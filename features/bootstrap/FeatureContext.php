@@ -24,7 +24,7 @@ require_once 'PHPUnit/Framework/Assert/Functions.php';
 class FeatureContext extends BehatContext
 {
     /**
-     * @var JetPay\Objects\JetPay
+     * @var JetPay
      */
     protected $request;
 
@@ -33,6 +33,9 @@ class FeatureContext extends BehatContext
      */
     protected $client;
 
+    /**
+     * @var JetPayResponse
+     */
     protected $response;
 
     protected $major_test_id;
@@ -99,9 +102,7 @@ class FeatureContext extends BehatContext
      */
     public function iExecuteTheRequest()
     {
-        //echo $this->request;
-        //exit;
-        $this->response = $this->client->post($this->request);
+        $this->response = $this->client->transaction()->execute($this->request);
     }
 
     /**
@@ -110,6 +111,7 @@ class FeatureContext extends BehatContext
     public function iCreateARequest($arg1)
     {
       $this->request = new JetPay();
+
       // Use the test merchant id by default.
       $this->request->setTerminalId('TESTMERCHANT');
       $this->request->setTransactionType($arg1);
@@ -120,22 +122,15 @@ class FeatureContext extends BehatContext
      */
     public function iShouldGetActioncode($arg1)
     {
-      $doc = new DOMDocument();
-      $doc->loadXML($this->response->getBody());
-      $response = JetPayResponse::fromXML($doc);
-      assertRegExp("/$arg1/", $response->getActionCode());
+      assertRegExp("/$arg1/", $this->response->getActionCode());
     }
 
     /**
-     * @Then /^I should get$/
+     * @Given /^I shoud get a "([^"]*)"$/
      */
-    public function iShouldGet(PyStringNode $string)
+    public function iShoudGetA($arg1)
     {
-      $expected = new DOMDocument();
-      $expected->loadXML($string);
-      $got = new DOMDocument();
-      $got->loadXML($this->response->getBody());
-      assertEquals($expected->saveXML(), $got->saveXML());
+      throw new PendingException();
     }
 
     /**
@@ -143,10 +138,7 @@ class FeatureContext extends BehatContext
      */
     public function iStoreTheResponse()
     {
-      $doc = new DOMDocument();
-      $doc->loadXML($this->response->getBody());
-      $response = JetPayResponse::fromXML($doc);
-      $this->lastResponse = $response;
+      $this->lastResponse = $this->response;
     }
 
     /**
@@ -181,13 +173,10 @@ class FeatureContext extends BehatContext
       if (empty($this->major_test_id) || empty($this->current_test_id)) {
         throw new ErrorException('Current test case not found, step invalid.');
       }
-      $doc = new DOMDocument();
-      $doc->loadXML($this->response->getBody());
-      $response = JetPayResponse::fromXML($doc);
 
       // Store the major test case response on the first minor test.
       if (!isset(self::$test_shared_storage[$this->major_test_id])) {
-        self::$test_shared_storage[$this->major_test_id] = $response;
+        self::$test_shared_storage[$this->major_test_id] = $this->response;
       }
     }
 
@@ -195,10 +184,7 @@ class FeatureContext extends BehatContext
      * @AfterScenario @certification
      */
     public function storeCertification() {
-      $doc = new DOMDocument();
-      $doc->loadXML($this->response->getBody());
-      $response = JetPayResponse::fromXML($doc);
-      self::$test_case_result[$this->current_test_id] = $response;
+      self::$test_case_result[$this->current_test_id] = $this->response;
     }
 
     /**

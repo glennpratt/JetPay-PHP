@@ -1,6 +1,9 @@
 <?php
 namespace JetPay;
 
+use Guzzle\Http\Message\EntityEnclosingRequest;
+use JetPay\TransactionService;
+
 class Client {
 
   protected $headers = array(
@@ -19,6 +22,20 @@ class Client {
     $this->gateway = $url;
   }
 
+  /**
+   *
+   * @return TransactionService
+   */
+  public function transaction() {
+    return new TransactionService($this);
+  }
+
+  /**
+   *
+   * @param string $data
+   *
+   * @return EntityEnclosingRequest
+   */
   public function post($data) {
     $client = new \Guzzle\Service\Client();
     return $client->post($this->gateway, $this->headers, (string) $data)->send();

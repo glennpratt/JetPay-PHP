@@ -10,6 +10,7 @@ class JetPay extends JetPayXMLObject {
   protected $TransactionID;
   protected $TransactionType;
   protected $TerminalID;
+  protected $Token;
 
   public function setTerminalId($id) {
     $this->TerminalID = $id;
@@ -48,5 +49,8 @@ class JetPay extends JetPayXMLObject {
   }
   public function setApproval($id) {
     $this->Approval = $id;
+  }
+  public function setToken($token) {
+    $this->Token = $token;
   }
 }

@@ -30,15 +30,18 @@ class JetPayXMLObject {
 
   /**
    *
-   * @param DOMDocument $xml
-   * @return \JetPay\Objects\JetPayXMLObject
+   * @param string $xml
+   * @return JetPayXMLObject
    */
-  public static function fromXML(DOMDocument $xml) {
-    $object = new static();
-    $root = $xml->documentElement;
+  public function loadXML($xml) {
+    $doc = new DOMDocument();
+    $doc->loadXML($xml);
+    $root = $doc->documentElement;
     foreach ($root->getElementsByTagName('*') as $element) {
-      $object->{$element->tagName} = $element->nodeValue;
+      $this->{$element->tagName} = $element->nodeValue;
     }
-    return $object;
+
+    // Allow chaining.
+    return $this;
   }
 }
