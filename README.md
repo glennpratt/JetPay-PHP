@@ -2,10 +2,11 @@
 
 PHP 5.3+ library for interacting with JetPay XML API. Sponsored by [AllPlayers.com](https://www.allplayers.com).
 
+### Travis-CI Buid and Test Status
 [![Build Status](https://secure.travis-ci.org/AllPlayers/JetPay-PHP.png)](http://travis-ci.org/AllPlayers/JetPay-PHP)
 
 ## Installation
-Use [Composer](http://getcomposer.org/).  In your composer.json:
+Available on [Packagist](http://packagist.org/packages/allplayers/jetpay), use [Composer](http://getcomposer.org/).  In your composer.json:
 
     {
       "require": {
