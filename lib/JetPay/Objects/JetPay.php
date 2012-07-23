@@ -66,4 +66,15 @@ class JetPay extends JetPayXMLObject {
   public function setToken($token) {
     $this->Token = $token;
   }
+
+  /**
+   * Generate a random, 18 charachter alphanumeric token based on 14 character
+   * datetime and 4 character random padding.
+   *
+   * @return string
+   */
+  public static function generateRandomToken() {
+    $random_padding = implode('', array_rand(array_flip(array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9))), 4));
+    return date('YmdHis') . $random_padding;
+  }
 }
