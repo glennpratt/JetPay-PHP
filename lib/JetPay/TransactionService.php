@@ -10,6 +10,10 @@ use JetPay\Objects\JetPayResponse;
  */
 class TransactionService {
 
+  const TEST_URL = 'https://test1.jetpay.com/jetpay';
+
+  const DEFAULT_LIVE_URL = 'https://gateway17.jetpay.com/jetpay';
+
   /**
    * @var Client
    */

@@ -7,10 +7,23 @@ use DOMDocument;
  * Represents the request JetPay XML data structure.
  */
 class JetPay extends JetPayXMLObject {
+  const AUTHONLY = 'AUTHONLY';
+  const CAPT = 'CAPT';
+  const CREDIT = 'CREDIT';
+  const SALE = 'SALE';
+  const VOID = 'VOID';
+
   protected $TransactionID;
   protected $TransactionType;
   protected $TerminalID;
   protected $Token;
+
+  protected $BillingAddress;
+  protected $BillingCity;
+  protected $BillingStateProv;
+  protected $BillingPostalCode;
+  protected $BillingCountry;
+  protected $Email;
 
   public function setTerminalId($id) {
     $this->TerminalID = $id;
