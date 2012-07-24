@@ -16,7 +16,7 @@ class JetPayXMLObject {
     $xml = new DOMDocument('1.0', 'utf-8');
     $jetpay = $xml->appendChild($xml->createElement('JetPay'));
     foreach ($this as $key => $property) {
-      $jetpay->appendChild($xml->createElement($key, $property));
+      empty($property) ?: $jetpay->appendChild($xml->createElement($key, $property));
     }
     return $xml;
   }
