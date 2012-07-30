@@ -227,7 +227,7 @@ class JetPay extends JetPayXMLObject {
   }
 
   /**
-   * @uses $
+   * @uses $BillingStateProv
    * @param string
    */
   public function setBillingStateProv($state_province) {
