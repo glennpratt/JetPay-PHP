@@ -7,6 +7,8 @@ class JetPayResponse extends JetPayXMLObject {
 
   protected $ActionCode;
 
+  protected $ResponseText;
+
   protected $TransactionID;
 
   protected $Token;
@@ -25,5 +27,9 @@ class JetPayResponse extends JetPayXMLObject {
 
   public function getToken() {
     return $this->Token;
+  }
+
+  public function getResponseText() {
+    return $this->ResponseText;
   }
 }

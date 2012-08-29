@@ -5,6 +5,8 @@ namespace JetPay\Objects;
  * Represents the request JetPay XML data structure which is defined in JetPay
  * XML PDF documentation.
  *
+ * @see http://www.jetpay.com/developer/dev-jetpay-api-xml-schema.php
+ *
  * @TODO - Not all defined schema elements are present.
  */
 class JetPay extends JetPayXMLObject {
