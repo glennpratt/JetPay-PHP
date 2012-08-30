@@ -199,6 +199,18 @@ class JetPay extends JetPayXMLObject {
   protected $UDField1;
 
   /**
+   * User-defined field, available for reporting purposes.
+   * @var string
+   */
+  protected $UDField2;
+
+  /**
+   * User-defined field, available for reporting purposes.
+   * @var string
+   */
+  protected $UDField3;
+
+  /**
    * Customer's IP address.
    * @var string
    */
@@ -381,11 +393,27 @@ class JetPay extends JetPayXMLObject {
   }
 
   /**
-   * @uses $UserIPAddress
+   * @uses $UDField1
    * @param string $string
    */
   public function setUDField1($string) {
-    $this->UserIPAddress = $string;
+    $this->UDField1 = $string;
+  }
+
+  /**
+   * @uses $UDField2
+   * @param string $string
+   */
+  public function setUDField2($string) {
+    $this->UDField2 = $string;
+  }
+
+  /**
+   * @uses $UDField3
+   * @param string $string
+   */
+  public function setUDField3($string) {
+    $this->UDField3 = $string;
   }
 
   /**
